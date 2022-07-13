@@ -1,7 +1,9 @@
+import PropTypes from "prop-types";
 import { useState } from "react"
 import { DeleteImages } from "./DeleteImages";
+//import PropType from "prop-types"
 
-export const AddCategory = ( { onNewCategory, onDelete, categories }) => {
+export const AddCategory = ( { onNewCategory, onDelete, actIcon }) => {
 
   const [inputValue, setInputValue] = useState('');
 
@@ -12,13 +14,12 @@ export const AddCategory = ( { onNewCategory, onDelete, categories }) => {
   const onSubmit= (event) => {
     event.preventDefault();
     if (inputValue.trim().length <=1) return ;
-    //setCategories(categories => [...categories, inputValue]);
     onNewCategory(inputValue.trim())
     setInputValue('');
   }
 
   return (
-    <form className="display: flex" onSubmit={ (event) => onSubmit(event) }>
+    <form aria-label="form" onSubmit={ (event) => onSubmit(event) }>
 
       <input 
           type="text"
@@ -27,8 +28,16 @@ export const AddCategory = ( { onNewCategory, onDelete, categories }) => {
           onChange={ (event) => onInputChange(event) }
       />
       {
-        categories.length!=0 && (<DeleteImages onDelete= {onDelete} />)
+        actIcon && (<DeleteImages onDelete= {onDelete} />)
       }
     </form>
   )
+}
+
+
+AddCategory.propTypes = {
+  onNewCategory:PropTypes.func.isRequired,
+  onDelete:PropTypes.func,
+  actIcon:PropTypes.bool.isRequired
+
 }

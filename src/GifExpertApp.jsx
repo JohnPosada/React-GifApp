@@ -11,7 +11,6 @@ export const GifExpertApp = () => {
         const repetido= categories.find((cat) => cat === value )
         if (!repetido) setCategories([value,...categories]); 
     };
-    console.log(categories);
 
     return (<>
         
@@ -22,7 +21,7 @@ export const GifExpertApp = () => {
         <AddCategory 
             onNewCategory = { (value) => onAddCategory(value) }
             onDelete={()=> setCategories([])}
-            categories= {categories}
+            actIcon= { categories.length != 0 }
             />
 
 
